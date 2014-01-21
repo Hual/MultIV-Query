@@ -21,6 +21,7 @@
         getExpansionName() - Returns the name of the expansion the server is available on
         getData() - Returns an array containing all of the data
         getIdentifier() - Returns the packet identifier as a string (should be "MIV")
+        getUnknownByte() - Returns the unknown byte
 
 */
 
@@ -64,6 +65,7 @@ class MultIVQuery
 		std::string getGameMode();
 		std::string getExpansionName();
 		std::string getIdentifier();
+		unsigned char getUnknownByte();
 	private:
 		bool error;
 		bool password;
