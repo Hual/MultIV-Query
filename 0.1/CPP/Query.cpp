@@ -189,6 +189,9 @@ bool MultIVQuery::update()
 		return (this->error = true);
 
 	this->identifier = std::string(reinterpret_cast<char*>(buf), 0, 3);
+	if(this->identifier.compare("MIV") != 0)
+		return (this->error = true);
+	
 	this->version = bytes_to_int(&buf[3]);
 	int str_length = bytes_to_int(&buf[8]);
 	this->hostname = std::string(reinterpret_cast<char*>(&buf[12]), 0, str_length);
