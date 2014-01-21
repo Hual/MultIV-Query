@@ -21,6 +21,7 @@
         getExpansionName() - Returns the name of the expansion the server is available on
         getData() - Returns an array containing all of the data
         getIdentifier() - Returns the packet identifier as a string (should be "MIV")
+        getUnknownByte() - Returns the unknown byte
 
 */
 
@@ -115,6 +116,11 @@ std::string MultIVQuery::getExpansionName()
 std::string MultIVQuery::getIdentifier()
 {
 	return this->identifier;
+}
+
+unsigned char MultIVQuery::getUnknownByte()
+{
+	return this->unknown;
 }
 
 void MultIVQuery::closeSock(int socket)
