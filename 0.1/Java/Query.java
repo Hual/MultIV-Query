@@ -111,20 +111,20 @@ public class MultIVQuery
 	
 	private static int bytesToInt(byte[] array, int index)
 	{
-        int integer = 0;
-        integer = (integer<<8)+array[index+3];
-        integer = (integer<<8)+array[index+2];
-        integer = (integer<<8)+array[index+1];
-        integer = (integer<<8)+array[index];
-        return integer;
+	        int integer = 0;
+	        integer = (integer<<8)+array[index+3];
+	        integer = (integer<<8)+array[index+2];
+	        integer = (integer<<8)+array[index+1];
+	        integer = (integer<<8)+array[index];
+	        return integer;
 	}
 	
 	private static short bytesToShort(byte[] array, int index)
 	{
-        int shrt = 0;
-        shrt = (shrt<<8)+array[index+1];
-        shrt = (shrt<<8)+array[index];
-        return (short)shrt;
+	        int shrt = 0;
+	        shrt = (shrt<<8)+array[index+1];
+	        shrt = (shrt<<8)+array[index];
+	        return (short)shrt;
 	}
 	
 	public boolean isErroneous()
