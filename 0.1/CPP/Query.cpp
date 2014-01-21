@@ -33,7 +33,7 @@ static int bytes_to_int(const unsigned char *ptr)
 	integer = (integer<<8)+ptr[2];
 	integer = (integer<<8)+ptr[1];
 	integer = (integer<<8)+ptr[0];
-
+	return integer;
 }
 
 static short bytes_to_short(const unsigned char *ptr)
