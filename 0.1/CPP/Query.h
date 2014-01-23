@@ -78,6 +78,5 @@ class MultIVQuery
 		std::string mode;
 		short players;
 		short max_players;
-		unsigned char unknown;
 		void closeSock(int);
 };
