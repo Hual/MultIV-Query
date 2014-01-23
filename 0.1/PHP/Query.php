@@ -23,6 +23,7 @@
 	getExpansionName() - Returns the name of the expansion the server is available on
 	getData() - Returns an array containing all of the data
 	getIdentifier() - Returns the packet identifier as a string (should be "MIV")
+	isSecure() - Returns true if the server is AC-protected, false if it isn't
 
 */
 class MultIVQuery
@@ -53,7 +54,7 @@ class MultIVQuery
 		$this->data['name'] = fread($handle, unpack("L", fread($handle, 4))[1]); // length will hopefully be 1 byte in the future
 		$this->data['mode'] = fread($handle, unpack("L", fread($handle, 4))[1]); // length will hopefully be 1 byte in the future
 		$this->data['password'] = (int)fread($handle, 1);
-		$this->data['?'] = (int)fread($handle, 1);
+		$this->data['secure'] = (int)fread($handle, 1);
 		$this->data['players'] = unpack("S", fread($handle, 2))[1];
 		$this->data['max-players'] = unpack("S", fread($handle, 2))[1];
 		$this->data['expansion'] = unpack("L", fread($handle, 4))[1]; // hopefully 1 byte in the future
@@ -116,8 +117,8 @@ class MultIVQuery
 		return $this->data['identifier'];
 	}
 	
-	public function getUnknownByte()
+	public function isSecure()
 	{
-		return $this->data['?'];
+		return $this->data['secure'];
 	}
 }
