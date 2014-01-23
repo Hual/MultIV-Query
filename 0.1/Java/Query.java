@@ -19,7 +19,6 @@
         isPassworded() - Returns true if the server is passworded, false if it isn't
         getExpansion() - Returns an integer representing the expansion the server is available on
         getExpansionName() - Returns the name of the expansion the server is available on
-        getData() - Returns an array containing all of the data
         getIdentifier() - Returns the packet identifier as a string (should be "MIV")
         isSecure() - Returns true if the server is AC-protected, false if it isn't
 
