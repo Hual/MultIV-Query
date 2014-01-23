@@ -214,19 +214,3 @@ bool MultIVQuery::update()
 	this->closeSock(sock);
 	return (this->error = false);
 }
-
-int main(void)
-{
-	MultIVQuery query("37.122.211.8", 5000);
-	std::cout << query.getIdentifier() << std::endl;
-	std::cout << query.isErroneous() << std::endl;
-	std::cout << query.getHostName() << std::endl;
-	std::cout << query.getPlayers() << std::endl;
-	std::cout << query.getMaxPlayers() << std::endl;
-	std::cout << query.getNetVersion() << std::endl;
-	std::cout << query.getGameMode() << std::endl;
-	std::cout << query.isPassworded() << std::endl;
-	std::cout << query.getExpansion() << std::endl;
-	std::cout << query.getExpansionName() << std::endl;
-	std::cout << query.isSecure() << std::endl;
-}
