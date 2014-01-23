@@ -26,7 +26,7 @@
 
 */
 
-#include "Query.h"
+#include "Query_v2.h"
 
 MultIVQuery::MultIVQuery(std::string address, int port = 5000)
 {
@@ -88,7 +88,7 @@ bool MultIVQuery::isPassworded()
 	return this->password;
 }
 
-int MultIVQuery::getExpansion()
+unsigned char MultIVQuery::getExpansion()
 {
 	return this->expansion;
 }
