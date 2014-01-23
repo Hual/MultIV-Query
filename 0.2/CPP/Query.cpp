@@ -100,9 +100,9 @@ std::string MultIVQuery::getExpansionName()
 		case 0:
 			return "Vanilla IV";
 		case 1:
-			return "The Ballad of Gay Tony";
-		case 2:
 			return "The Lost and Damned";
+		case 2:
+			return "The Ballad of Gay Tony";
 		default:
 			return "Unknown";
 	}
@@ -213,4 +213,20 @@ bool MultIVQuery::update()
 	this->accounts = buf[last_byte+8];
 	this->closeSock(sock);
 	return (this->error = false);
+}
+
+int main(void)
+{
+	MultIVQuery query("37.122.211.8", 5000);
+	std::cout << query.getIdentifier() << std::endl;
+	std::cout << query.isErroneous() << std::endl;
+	std::cout << query.getHostName() << std::endl;
+	std::cout << query.getPlayers() << std::endl;
+	std::cout << query.getMaxPlayers() << std::endl;
+	std::cout << query.getNetVersion() << std::endl;
+	std::cout << query.getGameMode() << std::endl;
+	std::cout << query.isPassworded() << std::endl;
+	std::cout << query.getExpansion() << std::endl;
+	std::cout << query.getExpansionName() << std::endl;
+	std::cout << query.isSecure() << std::endl;
 }
