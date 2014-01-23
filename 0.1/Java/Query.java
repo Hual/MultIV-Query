@@ -58,13 +58,13 @@ public class MultIVQuery
 	
 	public MultIVQuery(String address)
 	{
-		this.initialize(address, 5123);
+		this.initialize(address, 5000);
 	}
 	
 	public void initialize(String address, int port)
 	{
 		this.address = address;
-		this.port = port;
+		this.port = port+123;
 		this.update();
 	}
 	
