@@ -21,7 +21,7 @@
         getExpansionName() - Returns the name of the expansion the server is available on
         getData() - Returns an array containing all of the data
         getIdentifier() - Returns the packet identifier as a string (should be "MIV")
-        getUnknownByte() - Returns the unknown byte
+        isSecure() - Returns true if the server is AC-protected, false if it isn't
 
 */
 
@@ -48,6 +48,7 @@ MultIVQuery::~MultIVQuery()
 	this->mode = "";
 	this->password = false;
 	this->unknown = 0;
+	this->secure = false;
 }
 
 bool MultIVQuery::isErroneous()
@@ -100,9 +101,9 @@ std::string MultIVQuery::getIdentifier()
 	return this->identifier;
 }
 
-unsigned char MultIVQuery::getUnknownByte()
+bool MultIVQuery::isSecure()
 {
-	return this->unknown;
+	return this->secure;
 }
 
 void MultIVQuery::closeSock(int socket)
