@@ -48,7 +48,7 @@ public class MultIVQuery
 	private boolean
 		error,
 		password,
-		secure;
+	        secure;
 	
 	public MultIVQuery(String address, int port)
 	{
