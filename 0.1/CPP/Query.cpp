@@ -27,24 +27,6 @@
 
 #include "Query.h"
 
-static int bytes_to_int(const unsigned char *ptr)
-{
-	unsigned int integer = 0;
-	integer = (integer<<8)+ptr[3];
-	integer = (integer<<8)+ptr[2];
-	integer = (integer<<8)+ptr[1];
-	integer = (integer<<8)+ptr[0];
-	return integer;
-}
-
-static short bytes_to_short(const unsigned char *ptr)
-{
-	unsigned short shrt = 0;
-	shrt = (shrt<<8)+ptr[1];
-	shrt = (shrt<<8)+ptr[0];
-	return shrt;
-}
-
 MultIVQuery::MultIVQuery(std::string address, int port = 5000)
 {
 	this->address = address;
@@ -192,18 +174,19 @@ bool MultIVQuery::update()
 	if(this->identifier.compare("MIV") != 0)
 		return (this->error = true);
 
-	this->version = bytes_to_int(&buf[3]);
-	int str_length = bytes_to_int(&buf[8]);
+	memcpy(&this->version, &buf[3], 4);
+	int str_length; // The IT crowd reference here, length will hopefully be 1 byte in the future
+	memcpy(&str_length, &buf[8], 4);
 	this->hostname = std::string(reinterpret_cast<char*>(&buf[12]), 0, str_length);
-	last_byte = 12+str_length;	// IT crowd reference here, length will hopefully be 1 byte in the future
-	str_length = bytes_to_int(&buf[last_byte]);
+	last_byte = 12+str_length;
+	memcpy(&str_length, &buf[last_byte], 4);
 	this->mode = std::string(reinterpret_cast<char*>(&buf[last_byte+4]), 0, str_length);
 	last_byte += 4+str_length;	// length will hopefully be 1 byte in the future
 	this->password = buf[last_byte];
 	this->unknown = buf[last_byte+1];
-	this->players = bytes_to_short(&buf[last_byte+2]);
-	this->max_players = bytes_to_short(&buf[last_byte+4]);
-	this->expansion = bytes_to_int(&buf[last_byte+6]);	// hopefully 1 byte in the future
+	memcpy(&this->players, &buf[last_byte+2], 2);
+	memcpy(&this->max_players, &buf[last_byte+4], 2);
+	memcpy(&this->expansion, &buf[last_byte+6], 4);	// hopefully 1 byte in the future
 	this->closeSock(sock);
 	return (this->error = false);
 }
