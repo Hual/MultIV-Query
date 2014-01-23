@@ -15,13 +15,13 @@
 	getPlayers() - Returns the amount of players currently connected to the server
 	getMaxPlayers() - Returns the maximum amount of players that can be connected to the server
 	getNetVersion() - Returns the net version of the server
-    getGameMode() - Returns the name of the server's current gamemode
-    isPassworded() - Returns true if the server is passworded, false if it isn't
-    getExpansion() - Returns an integer representing the expansion the server is available on
-    getExpansionName() - Returns the name of the expansion the server is available on
-    getData() - Returns an array containing all of the data
-    getIdentifier() - Returns the packet identifier as a string (should be "MIV")
-    getUnknownByte() - Returns the unknown byte
+        getGameMode() - Returns the name of the server's current gamemode
+        isPassworded() - Returns true if the server is passworded, false if it isn't
+        getExpansion() - Returns an integer representing the expansion the server is available on
+        getExpansionName() - Returns the name of the expansion the server is available on
+        getData() - Returns an array containing all of the data
+        getIdentifier() - Returns the packet identifier as a string (should be "MIV")
+        isSecure() - Returns true if the server is AC-protected, false if it isn't
 
 */
 
@@ -47,9 +47,8 @@ public class MultIVQuery
 		maxPlayers;
 	private boolean
 		error,
-		password;
-	private byte
-		unknown;
+		password,
+		secure;
 	
 	public MultIVQuery(String address, int port)
 	{
@@ -95,7 +94,7 @@ public class MultIVQuery
 			this.hostname = new String(Arrays.copyOfRange(buf, 12, (lastByte = 12+bytesToInt(buf, 8))));	// length will hopefully be 1 byte in the future
 			this.mode = new String(Arrays.copyOfRange(buf, lastByte+4, (lastByte += 4+Array.getInt(buf, lastByte))));	// length will hopefully be 1 byte in the future
 			this.password = !(buf[lastByte] == 0);
-			this.unknown = buf[lastByte+1];
+			this.secure = !(buf[lastByte+1] == 0);
 			this.players = bytesToShort(buf, lastByte+2);
 			this.maxPlayers = bytesToShort(buf, lastByte+4);
 			this.expansion = bytesToInt(buf, lastByte+6);	// hopefully 1 byte in the future
@@ -177,8 +176,8 @@ public class MultIVQuery
 		return this.identifier;
 	}
 	
-	public byte getUnknownByte()
+	public boolean isSecure()
 	{
-		return unknown;
+		return this.secure;
 	}
 }
