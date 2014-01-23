@@ -47,7 +47,6 @@ MultIVQuery::~MultIVQuery()
 	this->identifier = "";
 	this->mode = "";
 	this->password = false;
-	this->unknown = 0;
 	this->secure = false;
 }
 
@@ -184,7 +183,7 @@ bool MultIVQuery::update()
 	this->mode = std::string(reinterpret_cast<char*>(&buf[last_byte+4]), 0, str_length);
 	last_byte += 4+str_length;	// length will hopefully be 1 byte in the future
 	this->password = buf[last_byte];
-	this->unknown = buf[last_byte+1];
+	this->secure = buf[last_byte+1];
 	memcpy(&this->players, &buf[last_byte+2], 2);
 	memcpy(&this->max_players, &buf[last_byte+4], 2);
 	memcpy(&this->expansion, &buf[last_byte+6], 4);	// hopefully 1 byte in the future
