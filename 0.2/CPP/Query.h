@@ -59,15 +59,15 @@ class MultIVQuery
 		bool isPassworded();
 		bool isAnnounceEnabled();
 		bool isAccountSystemEnabled();
+		bool isSecure();
 		int getMaxPlayers();
 		int getPlayers();
 		int getNetVersion();
-		int getExpansion();
+		unsigned char getExpansion();
 		std::string getHostName();
 		std::string getGameMode();
 		std::string getExpansionName();
 		std::string getIdentifier();
-		bool isSecure();
 	private:
 		bool error;
 		bool password;
@@ -75,7 +75,7 @@ class MultIVQuery
 		bool announce;
 		bool accounts;
 		int version;
-		int expansion;
+		unsigned char expansion;
 		int port;
 		std::string hostname;
 		std::string address;
