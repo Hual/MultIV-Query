@@ -21,6 +21,7 @@
         getExpansionName() - Returns the name of the expansion the server is available on
         getData() - Returns an array containing all of the data
         getIdentifier() - Returns the packet identifier as a string (should be "MIV")
+        getUnknownByte() - Returns the unknown byte
 
 */
 
@@ -117,6 +118,11 @@ std::string MultIVQuery::getIdentifier()
 	return this->identifier;
 }
 
+unsigned char MultIVQuery::getUnknownByte()
+{
+	return this->unknown;
+}
+
 void MultIVQuery::closeSock(int socket)
 {
 #if (defined(WIN32) || defined(_WIN32) || defined(_WIN64))
@@ -189,15 +195,15 @@ bool MultIVQuery::update()
 	this->version = bytes_to_int(&buf[3]);
 	int str_length = bytes_to_int(&buf[8]);
 	this->hostname = std::string(reinterpret_cast<char*>(&buf[12]), 0, str_length);
-	last_byte = 12+str_length;																// IT crowd reference here, length will hopefully be 1 byte in the future
+	last_byte = 12+str_length;	// IT crowd reference here, length will hopefully be 1 byte in the future
 	str_length = bytes_to_int(&buf[last_byte]);
 	this->mode = std::string(reinterpret_cast<char*>(&buf[last_byte+4]), 0, str_length);
-	last_byte += 4+str_length;																// length will hopefully be 1 byte in the future
+	last_byte += 4+str_length;	// length will hopefully be 1 byte in the future
 	this->password = buf[last_byte];
 	this->unknown = buf[last_byte+1];
 	this->players = bytes_to_short(&buf[last_byte+2]);
 	this->max_players = bytes_to_short(&buf[last_byte+4]);
-	this->expansion = bytes_to_int(&buf[last_byte+6]);										// hopefully 1 byte in the future
+	this->expansion = bytes_to_int(&buf[last_byte+6]);	// hopefully 1 byte in the future
 	this->closeSock(sock);
 	return (this->error = false);
 }
