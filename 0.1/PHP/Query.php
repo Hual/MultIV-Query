@@ -29,10 +29,10 @@ class MultIVQuery
 {	
 	private $address, $port, $data;
 
-	function __construct($address, $port = 5123)
+	function __construct($address, $port = 5000)
 	{
 		$this->address = $address;
-		$this->port = $port;
+		$this->port = $port+123;
 		$this->update();
 	}
 
@@ -114,5 +114,10 @@ class MultIVQuery
 	public function getIdentifier()
 	{
 		return $this->data['identifier'];
+	}
+	
+	public function getUnknownByte()
+	{
+		return $this->data['?'];
 	}
 }
